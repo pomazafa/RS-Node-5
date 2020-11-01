@@ -1,0 +1,4 @@
+{"level":"info","message":"Request info: Method - GET, url - /users, query params - {}, body - {}","service":"user-service"}
+{"level":"info","message":"Request info: Method - GET, url - /favicon.ico, query params - {}, body - {}","service":"user-service"}
+{"level":"info","message":"Request info: Method - GET, url - /users/f5b95828-77c6-4280-947c-643f35679a89, query params - {}, body - {}","service":"user-service"}
+{"level":"info","message":"Request info: Method - GET, url - /users/f5b95828-77c6-4280-947c-643f35679a89?a=5, query params - {\"a\":\"5\"}, body - {}","service":"user-service"}
