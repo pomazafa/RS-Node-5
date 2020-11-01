@@ -5,6 +5,7 @@ const UserModel = mongoose.model('User', UserSchema);
 const TaskService = require('../tasks/task.service');
 const taskModel = require('../tasks/task.model');
 var createError = require('http-errors');
+const { hashPassword } = require('../../common/hashHelper')
 
 const getAll = async () => {
   return db.getAllEntities(UserModel);
@@ -31,6 +32,7 @@ const remove = async id => {
 };
 
 const save = async user => {
+  user.password = await hashPassword(user.password);
   return db.saveEntity(UserModel, new User(user));
 };
 
@@ -38,4 +40,8 @@ const update = async (id, user) => {
   return await db.updateEntity(UserModel, id, user);
 };
 
-module.exports = { getAll, get, remove, save, update };
+const getByLogin = async (login) => {
+  return await UserModel.findOne({ login: login })
+};
+
+module.exports = { getAll, get, remove, save, update, getByLogin };

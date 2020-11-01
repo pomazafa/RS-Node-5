@@ -5,6 +5,8 @@ const YAML = require('yamljs');
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
 const taskRouter = require('./resources/tasks/task.router');
+const loginRouter = require('./login/login.router');
+const checkToken = require('./middleware/checkToken')
 const { requestLog, errorHandle } = require('./logging/logging');
 // eslint-disable-next-line node/no-extraneous-require
 const bodyparser = require('body-parser');
@@ -31,9 +33,10 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-app.use('/users', userRouter);
-app.use('/boards', boardRouter);
-app.use('/boards/:boardId/tasks', taskRouter);
+app.use('/login', loginRouter);
+app.use('/users', checkToken, userRouter);
+app.use('/boards', checkToken, boardRouter);
+app.use('/boards/:boardId/tasks', checkToken, taskRouter);
 
 app.use(function(err, req, res, next) {
   errorHandle(err);
