@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const { User, UserSchema } = require('./user.model');
 const UserModel = mongoose.model('User', UserSchema);
 const TaskService = require('../tasks/task.service');
-const taskModel = require('../tasks/task.model');
-var createError = require('http-errors');
-const { hashPassword } = require('../../common/hashHelper')
+const createError = require('http-errors');
+const { hashPassword } = require('../../common/hashHelper');
 
 const getAll = async () => {
   return db.getAllEntities(UserModel);
@@ -40,8 +39,8 @@ const update = async (id, user) => {
   return await db.updateEntity(UserModel, id, user);
 };
 
-const getByLogin = async (login) => {
-  return await UserModel.findOne({ login: login })
+const getByLogin = async login => {
+  return await UserModel.findOne({ login });
 };
 
 module.exports = { getAll, get, remove, save, update, getByLogin };

@@ -6,7 +6,7 @@ const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
 const taskRouter = require('./resources/tasks/task.router');
 const loginRouter = require('./login/login.router');
-const checkToken = require('./middleware/checkToken')
+const checkToken = require('./middleware/checkToken');
 const { requestLog, errorHandle } = require('./logging/logging');
 // eslint-disable-next-line node/no-extraneous-require
 const bodyparser = require('body-parser');
@@ -38,7 +38,7 @@ app.use('/users', checkToken, userRouter);
 app.use('/boards', checkToken, boardRouter);
 app.use('/boards/:boardId/tasks', checkToken, taskRouter);
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   errorHandle(err);
   res.status(err.status).send(err);
 });
